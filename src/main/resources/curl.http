@@ -1,0 +1,55 @@
+### 查看版本
+GET http://{{localhost}}/flowable-rest/service/management/engine
+Authorization: Basic rest-admin test
+
+### 部署资源
+POST http://{{localhost}}/flowable-rest/service/repository/deployments
+Authorization: Basic rest-admin test
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="data"; filename="holiday-request.bpmn20.xml"
+Content-Type: text/xml
+
+< holiday-request.bpmn20.xml
+--WebAppBoundary
+
+### 查询部署资源
+GET http://{{localhost}}/flowable-rest/service/repository/process-definitions
+Authorization: Basic rest-admin test
+
+### 启动流程实例
+POST http://{{localhost}}/flowable-rest/service/runtime/process-instances
+Authorization: Basic rest-admin test
+Content-Type: application/json
+
+{
+  "processDefinitionKey": "holidayRequest",
+  "variables": [
+    {
+      "name": "employee",
+      "value": "John Doe"
+    },
+    {
+      "name": "nrOfHolidays",
+      "value": 7
+    }
+  ]
+}
+
+### 查询任务列表
+POST http://{{localhost}}/flowable-rest/service/query/tasks
+Authorization: Basic rest-admin test
+Content-Type: application/json
+
+{ "candidateGroup" : "managers" }
+
+### 完成任务
+### 必须把jar文件放入到lib下，REST才能找到对应的资源（cn.adbyte.flowable.a.CallExternalSystemDelegate）
+POST http://{{localhost}}/flowable-rest/service/runtime/tasks/01bb8377-dbf0-11e8-b682-74d435e7a1d6
+Authorization: Basic rest-admin test
+Content-Type: application/json
+
+{ "action" : "complete", "variables" : [ { "name" : "approved", "value" : true} ]  }
+
+###
