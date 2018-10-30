@@ -1,11 +1,9 @@
 package standalone;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.flowable.bpmn.model.BpmnModel;
-import org.flowable.engine.ManagementService;
-import org.flowable.engine.RepositoryService;
-import org.flowable.engine.RuntimeService;
-import org.flowable.engine.TaskService;
+import org.flowable.engine.*;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.repository.DeploymentBuilder;
 import org.flowable.engine.repository.ProcessDefinition;
@@ -14,8 +12,6 @@ import org.flowable.engine.runtime.ExecutionQuery;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.flowable.task.api.TaskQuery;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,9 +32,14 @@ import static org.flowable.engine.impl.test.AbstractTestCase.assertEquals;
 /**
  * @author Adam
  */
+@Slf4j
 @Component
 public class FlowableFactory {
-    private static final Logger logger = LoggerFactory.getLogger(FlowableFactory.class);
+    /**
+     * 流程引擎
+     */
+    @Autowired
+    private ProcessEngine processEngine;
     /**
      * 存储服务
      */
@@ -81,13 +82,9 @@ public class FlowableFactory {
         // builder.disableBpmnValidation();
         // 部署
         Deployment dep = builder.deploy();
-        logger.debug("部署：");
-        for (String bpmn : file) {
-            logger.debug(bpmn);
-        }
-        List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery()
+        log.debug("{} 部署成功！", Arrays.toString(file));
+        return repositoryService.createProcessDefinitionQuery()
                 .deploymentId(dep.getId()).latestVersion().list();
-        return processDefinitions;
     }
 
     /**
@@ -104,7 +101,6 @@ public class FlowableFactory {
 
     /**
      * 部署并启动一个流程
-     *
      * @param bpmn20Xml
      * @return
      */
@@ -115,10 +111,10 @@ public class FlowableFactory {
         for (ProcessDefinition p : processDefinitions) {
             // 启动流程
             processInstance = runtimeService.startProcessInstanceById(p.getId(), p.getKey(), param);
-            logger.debug("流程实例id：" + processInstance.getId() + ", BusinessKey:" + processInstance.getBusinessKey() + " 已启动 ...");
+            log.debug("流程实例[{}] BusinessKey[{}] 已启动 ...", processInstance, processInstance.getBusinessKey());
 
         }
-        logger.debug("这里默认只返回一个流程定义###");
+        log.debug("返回的流程实例[{},{}]", processInstance, processInstance.getBusinessKey());
         return processInstance;
     }
 
@@ -136,18 +132,17 @@ public class FlowableFactory {
             throw new RuntimeException("流程实例不能为空！");
         }
 
-        logger.debug("当前流程实例id：" + pi.getId() + ", BusinessKey:" + pi.getBusinessKey() + "正在获取任务 ...");
+        log.debug("当前流程实例id：" + pi.getId() + ", BusinessKey:" + pi.getBusinessKey() + "正在获取任务 ...");
 
         List<Task> tasks = taskService.createTaskQuery().processInstanceId(pi.getId()).list();
 
         Print.tasks(tasks);
         for (Task task : tasks) {
-            logger.debug("当前任务：" + task.getName());
             taskService.complete(task.getId(), params);
-            logger.debug("任务已完成");
+            log.debug("当前任务：[{}] 任务已完成！", task);
             List<Task> tasks2 = taskService.createTaskQuery().processInstanceId(pi.getId()).list();
             for (Task t : tasks2) {
-                logger.debug("当前最新任务：" + t.getName());
+                log.debug("当前最新任务：[{}]", t);
             }
         }
 
@@ -194,14 +189,14 @@ public class FlowableFactory {
         File xmlFile = new File(userHomeDir + bpmnFileName);
         FileUtils.copyInputStreamToFile(processBpmn, xmlFile);
 
-        logger.debug("流程文件" + xmlFile.getAbsolutePath() + " 写入完成！");
+        log.debug("流程文件" + xmlFile.getAbsolutePath() + " 写入完成！");
         deploymentResource.close();
         if (png) {
             // 导出流程图
             InputStream processDiagram = repositoryService.getProcessDiagram(processInstance.getProcessDefinitionId());
             File pngFile = new File(userHomeDir + pngFileName);
             FileUtils.copyInputStreamToFile(processDiagram, pngFile);
-            logger.debug("流程图片" + pngFile.getAbsolutePath() + " 写入完成！");
+            log.debug("流程图片" + pngFile.getAbsolutePath() + " 写入完成！");
             processDiagram.close();
         }
         return deployment;
@@ -218,9 +213,9 @@ public class FlowableFactory {
             FileOutputStream fos = new FileOutputStream(file);
             ImageIO.write(bufferedImage, "png", fos);
             fos.close();
-            logger.debug("流程图片" + file.getAbsolutePath() + " 写入完成！");
+            log.debug("流程图片" + file.getAbsolutePath() + " 写入完成！");
         } catch (IOException e) {
-            logger.error("流程图片写入失败！" + e.getMessage());
+            log.error("流程图片写入失败！" + e.getMessage());
         }
     }
 
@@ -256,6 +251,7 @@ public class FlowableFactory {
 
     /**
      * 获取子流程列表
+     *
      * @param processInstanceID
      * @return
      */
@@ -271,7 +267,7 @@ public class FlowableFactory {
     }
 
     public void messageEventReceived(String messageName, String executionId) {
-        runtimeService.messageEventReceived(messageName,executionId);
+        runtimeService.messageEventReceived(messageName, executionId);
     }
 
     public void trigger(String executionId) {
@@ -284,5 +280,12 @@ public class FlowableFactory {
 
     public void activateProcessInstanceById(String processInstanceID) {
         runtimeService.activateProcessInstanceById(processInstanceID);
+    }
+    public boolean isAsyncExecutorActivate(){
+        return processEngine.getProcessEngineConfiguration().isAsyncExecutorActivate();
+    }
+
+    public boolean isAsyncHistoryExecutorActivate(){
+        return processEngine.getProcessEngineConfiguration().isAsyncHistoryExecutorActivate();
     }
 }

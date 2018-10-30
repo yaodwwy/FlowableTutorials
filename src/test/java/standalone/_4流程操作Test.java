@@ -1,5 +1,6 @@
 package standalone;
 
+import lombok.extern.slf4j.Slf4j;
 import org.flowable.common.engine.api.FlowableException;
 import org.flowable.engine.runtime.Execution;
 import org.flowable.engine.runtime.ProcessInstance;
@@ -19,6 +20,7 @@ import java.util.List;
  * 暂停的工作
  * 无法执行的工作
  */
+@Slf4j
 @RunWith(SpringRunner.class)
 @Import({FlowableStandaloneConfig.class})
 public class _4流程操作Test {
@@ -35,7 +37,7 @@ public class _4流程操作Test {
             factory.startProcessInstanceById(processDefinitionID);
         } catch (FlowableException e) {
             String message = e.getMessage();
-            System.out.println(message);
+            log.debug(message);
             boolean suspended = message.endsWith("suspended");
             Assert.assertTrue(suspended);
         }
@@ -47,15 +49,10 @@ public class _4流程操作Test {
 
         // 查当前的子执行流（只有一个）
         List<Execution> exe = factory.listChildExecution(processInstance.getId());
-        System.out.println("当前节点：");
         Print.exec(exe);
-
         factory.signalEventReceived("testSignal");
-
         //再查一次
         exe = factory.listChildExecution(processInstance.getId());
-
-        System.out.println("当前节点：");
         Print.exec(exe);
     }
 
@@ -65,7 +62,6 @@ public class _4流程操作Test {
 //        MessageEvent.bpmn
         // 查当前的子执行流（只有一个）
         List<Execution> exe = factory.listChildExecution(processInstance.getId());
-        System.out.println("当前节点：");
         Print.exec(exe);
 
         // 一个消息触发的中间捕获事件
@@ -73,7 +69,6 @@ public class _4流程操作Test {
         factory.messageEventReceived("testMsg", exe.get(0).getId());
 
         exe = factory.listChildExecution(processInstance.getId());
-        System.out.println("当前节点：");
         Print.exec(exe);
     }
 
@@ -82,24 +77,24 @@ public class _4流程操作Test {
         ProcessInstance processInstance = factory.deployAndStart("processes/_4接收任务触发流程继续.bpmn20.xml");
         // 查当前的子执行流（只有一个）
         List<Execution> exe = factory.listChildExecution(processInstance.getId());
-        System.out.println("当前节点:");
         Print.exec(exe);
-
         // 等待任务，也就是说需要手动推进下一步的执行
         // 让它往前走
         factory.trigger(exe.get(0).getId());
-
         exe = factory.listChildExecution(processInstance.getId());
-        System.out.println("当前节点:");
         Print.exec(exe);
     }
 
     @Test
     public void 流程操作() throws InterruptedException {
+        if (!factory.isAsyncExecutorActivate()) {
+            log.error("未打开异步，不能测试！");
+            return;
+        }
         ProcessInstance processInstance = factory.deployAndStart("processes/_4流程操作.bpmn20.xml");
         String processInstanceID = processInstance.getId();
         Print.instances(processInstance);
-        System.out.println("==================等20秒以上再关！等下会有异常处理类打印==================");
+        log.debug("==================等15秒以上再关！等下会有异常处理类打印==================");
 
         /*
         ISO_8601格式：（P ,Y,M,W,D,T,.H,M,S）
@@ -108,7 +103,7 @@ public class _4流程操作Test {
          */
         // 中止
         factory.suspendProcessInstanceById(processInstanceID);
-        Thread.sleep(19_000);
+        Thread.sleep(18_000);
         // 再激活
         factory.activateProcessInstanceById(processInstanceID);
     }

@@ -10,7 +10,7 @@
             让一个活动任务执行多次
         </documentation>
         <startEvent id="startevent1" name="Start"></startEvent>
-        <serviceTask id="servicetask1" name="Service Task" activiti:class="cn.adbyte.activiti.delegate.EventDelegate">
+        <serviceTask id="servicetask1" name="Service Task" activiti:class="cn.adbyte.activiti.org.flowable.delegate.EventDelegate">
             <multiInstanceLoopCharacteristics
                 isSequential="false" activiti:elementVariable="data">
                 <loopDataInputRef>datas1</loopDataInputRef>

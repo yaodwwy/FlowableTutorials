@@ -8,13 +8,13 @@
     <process id="myProcess" name="My process" isExecutable="true">
         <startEvent id="startevent1" name="Start"></startEvent>
         <serviceTask id="servicetask1" name="工商银行扣款"
-            activiti:class="cn.adbyte.activiti.delegate._6中间抛出事件补偿.IcbcReduceDelegate"></serviceTask>
+            activiti:class="cn.adbyte.activiti.org.flowable.delegate._6中间抛出事件补偿.IcbcReduceDelegate"></serviceTask>
         <serviceTask id="servicetask2" name="农业银行加款"
-            activiti:class="cn.adbyte.activiti.delegate._6中间抛出事件补偿.AbcAddDelegate"></serviceTask>
+            activiti:class="cn.adbyte.activiti.org.flowable.delegate._6中间抛出事件补偿.AbcAddDelegate"></serviceTask>
         <intermediateThrowEvent id="compensationintermediatethrowevent1"
             name="CompensationThrowingEvent">
             <extensionElements>
-                <activiti:executionListener event="start" class="cn.adbyte.activiti.delegate._6中间抛出事件补偿.MyExecutionListener">
+                <activiti:executionListener event="start" class="cn.adbyte.activiti.org.flowable.delegate._6中间抛出事件补偿.MyExecutionListener">
                 </activiti:executionListener>
             </extensionElements>
             <compensateEventDefinition></compensateEventDefinition>
@@ -37,10 +37,10 @@
             <compensateEventDefinition></compensateEventDefinition>
         </boundaryEvent>
         <serviceTask id="servicetask3" name="工商银行处理补偿"
-            activiti:class="cn.adbyte.activiti.delegate._6中间抛出事件补偿.IcbcAddDelegate"
+            activiti:class="cn.adbyte.activiti.org.flowable.delegate._6中间抛出事件补偿.IcbcAddDelegate"
             isForCompensation="true"></serviceTask>
         <serviceTask id="servicetask4" name="农业银行处理补偿"
-            activiti:class="cn.adbyte.activiti.delegate._6中间抛出事件补偿.AbcReduceDelegate" isForCompensation="true"></serviceTask>
+                     activiti:class="cn.adbyte.activiti.org.flowable.delegate._6中间抛出事件补偿.AbcReduceDelegate" isForCompensation="true"></serviceTask>
         <association id="association1" sourceRef="boundarycompensation1"
             targetRef="servicetask3"></association>
         <association id="association2" sourceRef="boundarycompensation2"

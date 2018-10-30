@@ -1,5 +1,6 @@
 package standalone;
 
+import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.*;
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author Adam
  */
+@Slf4j
 @Configuration
 @ComponentScan
 public class FlowableStandaloneConfig {
@@ -20,13 +22,12 @@ public class FlowableStandaloneConfig {
          * 数据源配置
          */
         ProcessEngineConfiguration cfg = new StandaloneProcessEngineConfiguration()
-                .setJdbcUrl("jdbc:mysql://localhost:3306/flowable?characterEncoding=UTF-8")
-                .setJdbcUsername("root")
-                .setJdbcPassword("root")
-                .setJdbcDriver("com.mysql.jdbc.Driver")
+                .setJdbcUrl("jdbc:h2:mem:flowable;DB_CLOSE_DELAY=30000")
+                .setJdbcUsername("sa")
+                .setJdbcDriver("org.h2.Driver")
                 .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE)
                 .setAsyncExecutorActivate(true)
-                .setCreateDiagramOnDeploy(true)
+//                .setCreateDiagramOnDeploy(true)
 
                 /**
                  * Mail配置
@@ -40,7 +41,7 @@ public class FlowableStandaloneConfig {
         ProcessEngine processEngine = cfg.buildProcessEngine();
         String pName = processEngine.getName();
         String ver = ProcessEngine.VERSION;
-        System.out.println("ProcessEngine [" + pName + "] Version: [" + ver + "]");
+        log.debug("ProcessEngine [" + pName + "] Version: [" + ver + "]");
 
         return processEngine;
     }
@@ -80,7 +81,6 @@ public class FlowableStandaloneConfig {
         // 表单服务
         return processEngine().getFormService();
     }
-
 
     @Bean
     public HistoryService historyService() {

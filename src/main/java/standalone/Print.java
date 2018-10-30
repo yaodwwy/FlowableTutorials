@@ -1,5 +1,6 @@
 package standalone;
 
+import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.runtime.Execution;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
@@ -10,13 +11,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class Print {
-    private static final Logger logger = LoggerFactory.getLogger(Print.class);
+
+    final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public static void main(String[] args) {
-        logger.info("info");
-        logger.debug("debug");
-        logger.warn("warn");
+        // 记录下各种级别的信息,这些信息放在哪儿,以哪种方式存放,在log4j.properties文件中配置.
+        log.debug("This is debug message.");
+        log.info("This is a info message.");
+        log.debug("This is a warn message.");
+        log.error("This is a error message.....");
     }
 
     public static void tasks(Task tasks) {
@@ -27,16 +32,11 @@ public class Print {
 
     public static void tasks(List<Task> tasks) {
         for (Task task : tasks) {
-            logger.warn("================Print.tasks==============");
-            logger.warn("task id =" + task.getId());
-            logger.warn("name =" + task.getName());
-            logger.warn("owner =" + task.getOwner());
-            logger.warn("assignee =" + task.getAssignee());
-            logger.warn("executionId =" + task.getExecutionId());
-            logger.warn("TaskLocalVariables =" + task.getTaskLocalVariables());
-            logger.warn("ProcessVariables =" + task.getProcessVariables());
-            logger.warn("DelegationState =" + task.getDelegationState());
-            logger.warn("=====================================");
+            log.debug("================ 当前流程任务 ==============");
+            log.debug("[Task：{}] [name：{}] [owner：{}] [assignee：{}] [executionId：{}] [TaskLocalVariables：{}] " +
+                            "[ProcessVariables：{}] [DelegationState：{}]",
+                    task.getId(), task.getName(), task.getOwner(), task.getAssignee(), task.getExecutionId()
+                    , task.getTaskLocalVariables(), task.getProcessVariables(), task.getDelegationState());
         }
     }
 
@@ -48,17 +48,12 @@ public class Print {
 
     public static void instances(List<ProcessInstance> instances) {
         for (ProcessInstance pi : instances) {
-            logger.warn("================Print.instances==============");
-            logger.warn("ProcessInstance id =" + pi.getId());
-            logger.warn("name =" + pi.getName());
-            logger.warn("BusinessKey =" + pi.getBusinessKey());
-            logger.warn("ProcessVariables =" + pi.getProcessVariables());
-            logger.warn("StartTime =" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(pi.getStartTime()));
-            logger.warn("StartUserId =" + pi.getStartUserId());
-            logger.warn("Description =" + pi.getDescription());
-            logger.warn("ProcessDefinitionName =" + pi.getProcessDefinitionName());
-            logger.warn("ProcessDefinitionKey =" + pi.getProcessDefinitionKey());
-            logger.warn("=====================================");
+            log.debug("=============== 当前流程实例 ==============");
+            log.debug("[ProcessInstance：{}] [name：{}] [BusinessKey：{}] [ProcessVariables：{}] [StartTime：{}] " +
+                            "[StartUserId：{}] [Description：{}] [ProcessDefinitionName：{}] [ProcessDefinitionKey：{}]",
+                    pi.getId(), pi.getName(), pi.getBusinessKey(), pi.getProcessVariables(),
+                    sdf.format(pi.getStartTime()), pi.getStartUserId(), pi.getDescription(),
+                    pi.getProcessDefinitionName(), pi.getProcessDefinitionKey());
         }
     }
 
@@ -70,15 +65,12 @@ public class Print {
 
     public static void exec(List<Execution> executions) {
         for (Execution e : executions) {
-            logger.warn("================Print.executions==============");
-            logger.warn("Execution id =" + e.getId());
-            logger.warn("name =" + e.getName());
-            logger.warn("ActivityId =" + e.getActivityId());
-            logger.warn("ParentId =" + e.getParentId());
-            logger.warn("ProcessInstanceId =" + e.getProcessInstanceId());
-            logger.warn("RootProcessInstanceId =" + e.getRootProcessInstanceId());
-            logger.warn("Description =" + e.getDescription());
-            logger.warn("=====================================");
+            log.debug("=============== 当前执行流节点 ==============");
+
+            log.debug("[Execution：{}] [name：{}] [ActivityId：{}] [ParentId：{}] [ProcessInstanceId：{}] " +
+                            "[RootProcessInstanceId：{}] [Description：{}] [isEnded：{}]",
+                    e.getId(), e.getName(), e.getActivityId(), e.getParentId(), e.getProcessInstanceId(),
+                    e.getRootProcessInstanceId(), e.getDescription(),e.isEnded());
         }
     }
 }

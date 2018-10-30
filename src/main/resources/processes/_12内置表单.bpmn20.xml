@@ -19,7 +19,7 @@
     </userTask>
     <endEvent id="endevent1" name="End">
       <extensionElements>
-        <activiti:executionListener event="start" class="cn.adbyte.activiti.delegate.VariableDelegate"></activiti:executionListener>
+        <activiti:executionListener event="start" class="cn.adbyte.activiti.org.flowable.delegate.VariableDelegate"></activiti:executionListener>
       </extensionElements>
     </endEvent>
     <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="usertask1"></sequenceFlow>

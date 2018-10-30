@@ -1,26 +1,17 @@
 package standalone;
 
-import org.apache.commons.io.FileUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.BpmnAutoLayout;
 import org.flowable.bpmn.model.*;
 import org.flowable.bpmn.model.Process;
-import org.flowable.common.engine.api.FlowableException;
-import org.flowable.engine.RepositoryService;
-import org.flowable.engine.RuntimeService;
-import org.flowable.engine.TaskService;
 import org.flowable.engine.repository.Deployment;
-import org.flowable.engine.repository.DeploymentBuilder;
 import org.flowable.engine.repository.ProcessDefinition;
-import org.flowable.engine.runtime.ProcessInstance;
-import org.flowable.task.api.Task;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.List;
 import java.util.zip.ZipInputStream;
@@ -40,13 +31,13 @@ import java.util.zip.ZipInputStream;
  * 2. 如果设置为级联删除，则会将运行的流程实例、流程任务以及流程实例的历史数据删除。
  * 3. 如果不级联删除，但是存在运行时数据，例如还有流程实例，就会删除失败。
  */
+@Slf4j
 @RunWith(SpringRunner.class)
 @Import({FlowableStandaloneConfig.class})
 public class _1部署Test {
 
     @Autowired
     private FlowableFactory factory;
-
 
     @Test
     public void 部署文本文件() throws IOException {
@@ -58,7 +49,7 @@ public class _1部署Test {
         inputStream.read(contents);
         String result = new String(contents);
         //输入结果
-        System.out.println("部署文本文件: " + result);
+        log.debug("部署文本文件: " + result);
     }
 
     /**
@@ -70,7 +61,7 @@ public class _1部署Test {
         FileInputStream fis = new FileInputStream(new File("src/main/resources/deploy/datas.zip"));
         ZipInputStream zis = new ZipInputStream(fis);
         Deployment deploy = factory.deploy(zis);
-        System.out.println("部署Zip文件完成，可在数据库中查看" + deploy.getId() + ", " + deploy.getName());
+        log.debug("部署Zip文件完成，可在数据库中查看" + deploy.getId() + ", " + deploy.getName());
     }
 
 
@@ -124,7 +115,7 @@ public class _1部署Test {
 
         // 3. 把BpmnModel对象部署到引擎
         Deployment deploy = factory.buildBpmn("dynamic-model", model, "my-process", true);
-        System.out.println(deploy.getId() + ", " + deploy.getName());
+        log.debug(deploy.getId() + ", " + deploy.getName());
 
     }
     // 创建用户任务

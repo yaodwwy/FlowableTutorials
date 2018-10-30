@@ -9,7 +9,7 @@
       </endEvent>
       <userTask id="usertask1" name="Tran Task"></userTask>
       <serviceTask id="servicetask1" name="Compensation"
-    activiti:class="cn.adbyte.activiti.delegate.CompenstaionDelegate" isForCompensation="true"></serviceTask>
+                   activiti:class="cn.adbyte.activiti.org.flowable.delegate.CompenstaionDelegate" isForCompensation="true"></serviceTask>
       <boundaryEvent id="boundarycompensation1" name="Compensate" attachedToRef="usertask1" cancelActivity="true">
         <compensateEventDefinition></compensateEventDefinition>
       </boundaryEvent>
