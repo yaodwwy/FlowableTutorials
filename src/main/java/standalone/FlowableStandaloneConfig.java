@@ -1,11 +1,18 @@
 package standalone;
 
 import lombok.extern.slf4j.Slf4j;
+import org.flowable.common.engine.api.delegate.event.FlowableEventListener;
+import org.flowable.common.engine.impl.history.HistoryLevel;
 import org.flowable.engine.*;
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
+import org.flowable.listener.MyEventListener;
+import org.flowable.listener.MyJobEventListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Adam
@@ -27,6 +34,7 @@ public class FlowableStandaloneConfig {
                 .setJdbcDriver("org.h2.Driver")
                 .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE)
                 .setAsyncExecutorActivate(true)
+                .setHistory(HistoryLevel.AUDIT.getKey())
 //                .setCreateDiagramOnDeploy(true)
 
                 /**
@@ -38,12 +46,25 @@ public class FlowableStandaloneConfig {
                 .setMailServerUsername("abc@163.com")
                 .setMailServerPassword("123456");
 
+        //事件侦听器
+        cfg.setEventListeners(getEventListener());
+        //类型事件侦听器
+        cfg.setTypedEventListeners(getTypeEventListener());
+
         ProcessEngine processEngine = cfg.buildProcessEngine();
         String pName = processEngine.getName();
         String ver = ProcessEngine.VERSION;
         log.debug("ProcessEngine [" + pName + "] Version: [" + ver + "]");
 
         return processEngine;
+    }
+
+    private Map<String, List<FlowableEventListener>> getTypeEventListener() {
+        return Map.of("JOB_EXECUTION_SUCCESS,JOB_EXECUTION_FAILURE", List.of(new MyJobEventListener()));
+    }
+
+    private List<FlowableEventListener> getEventListener() {
+        return List.of(new MyEventListener());
     }
 
     @Bean
