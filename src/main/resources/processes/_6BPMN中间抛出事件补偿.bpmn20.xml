@@ -5,7 +5,7 @@
     xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
     typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
     targetNamespace="http://www.activiti.org/test">
-    <process id="myProcess" name="My process" isExecutable="true">
+    <process id="_6BPMN中间抛出事件补偿.bpmn20.xml" name="My process" isExecutable="true">
         <startEvent id="startevent1" name="Start"></startEvent>
         <serviceTask id="servicetask1" name="工商银行扣款"
             activiti:class="cn.adbyte.activiti.org.flowable.delegate._6中间抛出事件补偿.IcbcReduceDelegate"></serviceTask>

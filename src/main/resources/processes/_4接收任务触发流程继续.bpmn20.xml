@@ -9,7 +9,7 @@
              typeLanguage="http://www.w3.org/2001/XMLSchema"
              expressionLanguage="http://www.w3.org/1999/XPath"
              targetNamespace="http://www.flowable.org/processdef">
-    <process id="myProcess" isClosed="false" isExecutable="true" name="My process" processType="None">
+    <process id="_4接收任务触发流程继续.bpmn20.xml" isClosed="false" isExecutable="true" name="My process" processType="None">
         <startEvent id="startevent1" name="Start"/>
         <!--receiveTask 等待任务，也就是说需要手动推进下一步的执行-->
         <receiveTask flowable:exclusive="true" id="receivetask1" name="Receive Task"/>

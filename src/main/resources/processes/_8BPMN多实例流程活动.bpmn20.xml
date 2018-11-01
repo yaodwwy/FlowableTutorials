@@ -5,7 +5,7 @@
     xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
     typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
     targetNamespace="http://www.activiti.org/test">
-    <process id="myProcess" name="My process" isExecutable="true">
+    <process id="_8BPMN多实例流程活动.bpmn20.xml" name="My process" isExecutable="true">
         <documentation>
             让一个活动任务执行多次
         </documentation>

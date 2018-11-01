@@ -2,7 +2,7 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
 
   <error id="mainError" errorCode="errorCode 400"></error>
-  <process id="myProcess" name="My process" isExecutable="true">
+  <process id="_6BPMN错误开始事件.bpmn20.xml" name="My process" isExecutable="true">
     <subProcess id="eventsubprocess1" name="Event sub Process" triggeredByEvent="true">
       <startEvent id="errorstartevent1" name="Error start" activiti:isInterrupting="false">
         <errorEventDefinition errorRef="mainError"></errorEventDefinition>

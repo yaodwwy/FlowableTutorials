@@ -5,7 +5,7 @@
     xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
     typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
     targetNamespace="http://www.activiti.org/test">
-    <process id="myProcess" name="My process" isExecutable="true">
+    <process id="_8BPMN嵌入式子流程.bpmn20.xml" name="My process" isExecutable="true">
         <startEvent id="startevent1" name="Start"></startEvent>
         <subProcess id="subprocess1" name="Sub Process">
             <startEvent id="startevent2" name="Start"></startEvent>

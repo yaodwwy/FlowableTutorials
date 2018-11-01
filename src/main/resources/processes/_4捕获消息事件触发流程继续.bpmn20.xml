@@ -6,7 +6,7 @@
     typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
     targetNamespace="http://www.activiti.org/test">
     <message id="testMsg" name="testMsg"></message>
-    <process id="myProcess" name="My process" isExecutable="true">
+    <process id="_4捕获消息事件触发流程继续.bpmn20.xml" name="My process" isExecutable="true">
         <startEvent id="startevent1" name="Start"></startEvent>
         <endEvent id="endevent1" name="End"></endEvent>
         <userTask id="usertask1" name="User Task"></userTask>
