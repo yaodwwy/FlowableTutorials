@@ -1,6 +1,7 @@
 package standalone;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ArrayUtils;
 import org.flowable.common.engine.api.delegate.event.FlowableEventListener;
 import org.flowable.common.engine.impl.history.HistoryLevel;
 import org.flowable.engine.*;
@@ -10,7 +11,10 @@ import org.flowable.listener.MyJobEventListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,11 +64,18 @@ public class FlowableStandaloneConfig {
     }
 
     private Map<String, List<FlowableEventListener>> getTypeEventListener() {
-        return Map.of("JOB_EXECUTION_SUCCESS,JOB_EXECUTION_FAILURE", List.of(new MyJobEventListener()));
+        Map<String, List<FlowableEventListener>> map = new HashMap<>();
+        FlowableEventListener myJobEventListener = new MyJobEventListener();
+        List<FlowableEventListener> objects = new ArrayList<>();
+        objects.add(myJobEventListener);
+        map.put("JOB_EXECUTION_SUCCESS,JOB_EXECUTION_FAILURE", objects);
+        return map;
     }
 
     private List<FlowableEventListener> getEventListener() {
-        return List.of(new MyEventListener());
+        List<FlowableEventListener> list = new ArrayList<>();
+        list.add(new MyEventListener());
+        return list;
     }
 
     @Bean

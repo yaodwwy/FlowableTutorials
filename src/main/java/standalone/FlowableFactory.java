@@ -14,6 +14,7 @@ import org.flowable.task.api.Task;
 import org.flowable.task.api.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -33,7 +34,7 @@ import static org.flowable.engine.impl.test.AbstractTestCase.assertEquals;
  * @author Adam
  */
 @Slf4j
-@Component
+@Service
 public class FlowableFactory {
     /**
      * 流程引擎

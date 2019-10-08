@@ -28,7 +28,7 @@ import java.util.Map;
 @Import({FeignConfig.class})
 public class DeploymentApiTest {
 
-    private final String url = "http://localhost:8080/activiti-rest/service";
+    private final String url = "http://localhost:8080/flowable-rest/service";
 
     @Autowired
     private Feign.Builder builder;

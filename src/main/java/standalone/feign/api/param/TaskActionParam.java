@@ -1,6 +1,7 @@
 package standalone.feign.api.param;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ public abstract class TaskActionParam {
         return new TaskActionParam.Resolve(action);
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
     public static class Complete extends TaskActionParam {
         private List<VariableParam> variables;
@@ -38,6 +40,7 @@ public abstract class TaskActionParam {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
     public static class Claim extends TaskActionParam {
         private String assignee;
@@ -48,6 +51,7 @@ public abstract class TaskActionParam {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
     public static class Delegate extends TaskActionParam {
         private String assignee;
@@ -58,6 +62,7 @@ public abstract class TaskActionParam {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
     public static class Resolve extends TaskActionParam {
         Resolve(ActionType action) {

@@ -1,6 +1,7 @@
 package standalone.feign.api.param;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ public abstract class StartProcessInstanceParam {
     }
 
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
     public static class ById extends StartProcessInstanceParam {
         private String processDefinitionId;
@@ -39,6 +41,7 @@ public abstract class StartProcessInstanceParam {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
     public static class ByKey extends StartProcessInstanceParam {
         private String processDefinitionKey;
@@ -52,6 +55,7 @@ public abstract class StartProcessInstanceParam {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
     public static class ByMessage extends StartProcessInstanceParam {
         private String message;

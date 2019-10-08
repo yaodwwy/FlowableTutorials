@@ -25,7 +25,7 @@ public class FlowableDMNConfig {
         config.setJdbcUrl("jdbc:mysql://localhost:3306/ACT?characterEncoding=UTF-8");
         config.setJdbcDriver("com.mysql.jdbc.Driver");
         config.setJdbcUsername("root");
-        config.setJdbcPassword("root");
+        config.setJdbcPassword("123456");
         config.setDatabaseSchemaUpdate("true");
         //MVEL方法注册器
         return config.buildDmnEngine();

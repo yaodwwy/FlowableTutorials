@@ -1,16 +1,12 @@
-spring:
-  datasource:
-    druid:
-      main:
-        url:  jdbc:mysql://127.0.0.1:3306/main?characterEncoding=UTF-8
-        username: root
-        password: root
-      flowable:
-        url:  jdbc:mysql://127.0.0.1:3306/flowable?characterEncoding=UTF-8
-        username: root
-        password: root
-logging:
-  level:
-    root: error
-    cn: debug
-    standalone: debug
+#spring:
+#  application.name: flowable
+#  datasource:
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://127.0.0.1:3306/flowable?characterEncoding=UTF-8
+#
+#logging:
+#  level:
+#    root: error
+#    cn: debug
+#    standalone: debug

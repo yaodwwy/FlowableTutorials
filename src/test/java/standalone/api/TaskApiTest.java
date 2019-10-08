@@ -19,6 +19,7 @@ import standalone.feign.api.param.VariableParam;
 import standalone.feign.decoder.StatusDecoder;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +56,9 @@ public class TaskApiTest {
         VariableParam variableParam = new VariableParam();
         variableParam.setName("var");
         variableParam.setValue("0");
-        TaskActionParam.Complete complete = TaskActionParam.createComplete(TaskActionParam.ActionType.complete, List.of(variableParam));
+        ArrayList<VariableParam> params = new ArrayList<>();
+        params.add(variableParam);
+        TaskActionParam.Complete complete = TaskActionParam.createComplete(TaskActionParam.ActionType.complete, params);
         JsonObject object = gson.toJsonTree(complete).getAsJsonObject();
         Integer integer = statusTaskApi.taskActions("515078", object);
         System.out.println(integer);

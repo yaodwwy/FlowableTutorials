@@ -43,13 +43,13 @@ public class FlowableDroolsConfig {
        return kieServices().getRepository();
     }
 
-    @Bean
+//    @Bean
     public ProcessEngine processEngine() {
 
         StandaloneProcessEngineConfiguration cfg = new StandaloneProcessEngineConfiguration();
         cfg.setJdbcUrl("jdbc:mysql://localhost:3306/ACT?characterEncoding=UTF-8")
                 .setJdbcUsername("root")
-                .setJdbcPassword("root")
+                .setJdbcPassword("123456")
                 .setJdbcDriver("com.mysql.jdbc.Driver")
                 .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE)
                 .setAsyncExecutorActivate(true)
