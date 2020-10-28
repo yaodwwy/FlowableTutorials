@@ -17,34 +17,4 @@
         <sequenceFlow id="sid-293D3FF9-21B5-4C78-8E95-B836EE36F44D" sourceRef="sid-C1070FEC-12E3-4C80-A86E-B54563E0BBAA"
                       targetRef="EndEvent_18of4d5"></sequenceFlow>
     </process>
-    <bpmndi:BPMNDiagram id="BPMNDiagram_Process_1">
-        <bpmndi:BPMNPlane bpmnElement="Process_1" id="BPMNPlane_Process_1">
-            <bpmndi:BPMNShape bpmnElement="StartEvent_1" id="BPMNShape_StartEvent_1">
-                <omgdc:Bounds height="30.0" width="30.0" x="173.0" y="100.0"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="Task_1x2ho2a" id="BPMNShape_Task_1x2ho2a">
-                <omgdc:Bounds height="80.0" width="100.0" x="255.0" y="75.0"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="EndEvent_18of4d5" id="BPMNShape_EndEvent_18of4d5">
-                <omgdc:Bounds height="28.0" width="28.0" x="510.0" y="101.0"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="sid-C1070FEC-12E3-4C80-A86E-B54563E0BBAA"
-                              id="BPMNShape_sid-C1070FEC-12E3-4C80-A86E-B54563E0BBAA">
-                <omgdc:Bounds height="80.0" width="100.0" x="422.0" y="172.0"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1d6ztpy" id="BPMNEdge_SequenceFlow_1d6ztpy">
-                <omgdi:waypoint x="203.0" y="115.0"></omgdi:waypoint>
-                <omgdi:waypoint x="255.0" y="115.0"></omgdi:waypoint>
-            </bpmndi:BPMNEdge>
-            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1gv081s" id="BPMNEdge_SequenceFlow_1gv081s">
-                <omgdi:waypoint x="355.0" y="149.99554234769687"></omgdi:waypoint>
-                <omgdi:waypoint x="422.0" y="196.8895690936107"></omgdi:waypoint>
-            </bpmndi:BPMNEdge>
-            <bpmndi:BPMNEdge bpmnElement="sid-293D3FF9-21B5-4C78-8E95-B836EE36F44D"
-                             id="BPMNEdge_sid-293D3FF9-21B5-4C78-8E95-B836EE36F44D">
-                <omgdi:waypoint x="493.44329896907215" y="172.0"></omgdi:waypoint>
-                <omgdi:waypoint x="517.3853705412738" y="127.33882802877774"></omgdi:waypoint>
-            </bpmndi:BPMNEdge>
-        </bpmndi:BPMNPlane>
-    </bpmndi:BPMNDiagram>
 </definitions>

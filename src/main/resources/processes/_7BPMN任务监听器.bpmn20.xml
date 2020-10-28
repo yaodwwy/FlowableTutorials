@@ -28,44 +28,4 @@
         <sequenceFlow id="flow3" sourceRef="usertask2"
             targetRef="endevent1"></sequenceFlow>
     </process>
-    <bpmndi:BPMNDiagram id="BPMNDiagram_myProcess">
-        <bpmndi:BPMNPlane bpmnElement="myProcess"
-            id="BPMNPlane_myProcess">
-            <bpmndi:BPMNShape bpmnElement="startevent1"
-                id="BPMNShape_startevent1">
-                <omgdc:Bounds height="35.0" width="35.0" x="0.0"
-                    y="10.000000000000043"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="usertask1"
-                id="BPMNShape_usertask1">
-                <omgdc:Bounds height="55.0" width="105.0"
-                              x="99.01508529717765" y="4.263256414560601E-14"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="endevent1"
-                id="BPMNShape_endevent1">
-                <omgdc:Bounds height="35.0" width="35.0" x="436.5628665056522"
-                    y="9.999999999999968"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="usertask2"
-                id="BPMNShape_usertask2">
-                <omgdc:Bounds height="55.0" width="105.0"
-                              x="267.5477812084746" y="0.0"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNEdge bpmnElement="flow1"
-                id="BPMNEdge_flow1">
-                <omgdi:waypoint x="175.0" y="177.0"></omgdi:waypoint>
-                <omgdi:waypoint x="250.0" y="177.0"></omgdi:waypoint>
-            </bpmndi:BPMNEdge>
-            <bpmndi:BPMNEdge bpmnElement="flow2"
-                id="BPMNEdge_flow2">
-                <omgdi:waypoint x="355.0" y="177.0"></omgdi:waypoint>
-                <omgdi:waypoint x="450.0" y="177.0"></omgdi:waypoint>
-            </bpmndi:BPMNEdge>
-            <bpmndi:BPMNEdge bpmnElement="flow3"
-                id="BPMNEdge_flow3">
-                <omgdi:waypoint x="555.0" y="177.0"></omgdi:waypoint>
-                <omgdi:waypoint x="620.0" y="177.0"></omgdi:waypoint>
-            </bpmndi:BPMNEdge>
-        </bpmndi:BPMNPlane>
-    </bpmndi:BPMNDiagram>
 </definitions>

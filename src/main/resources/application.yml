@@ -1,12 +1,14 @@
-#spring:
-#  application.name: flowable
-#  datasource:
-#    username: root
-#    password: 123456
-#    url: jdbc:mysql://127.0.0.1:3306/flowable?characterEncoding=UTF-8
-#
-#logging:
-#  level:
-#    root: error
-#    cn: debug
-#    standalone: debug
+spring:
+  application.name: flowable-rest
+  datasource:
+    username: postgres
+    password: echoshen
+    url: jdbc:postgresql://10.0.0.2:5432/core-flowable-6.6
+  main:
+    allow-bean-definition-overriding: true
+  liquibase:
+    enabled: false
+logging:
+  level:
+    root: error
+    cn.adbyte: debug

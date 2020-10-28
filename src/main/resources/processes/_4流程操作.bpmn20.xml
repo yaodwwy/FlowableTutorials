@@ -36,48 +36,4 @@
     <sequenceFlow id="SequenceFlow_1ykjkhi" sourceRef="serviceTaskID" targetRef="userTaskID" />
     <sequenceFlow id="SequenceFlow_04469uh" sourceRef="userTaskID" targetRef="endEvent" />
   </process>
-  <bpmndi:BPMNDiagram>
-    <bpmndi:BPMNPlane>
-      <bpmndi:BPMNShape bpmnElement="endEvent">
-        <omgdc:Bounds height="48.0" width="48.0" x="-24.0" y="-24.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="userTaskID">
-        <omgdc:Bounds height="48.0" width="120.0" x="-60.0" y="-24.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="serviceTaskID">
-        <omgdc:Bounds height="48.0" width="120.0" x="-60.0" y="-24.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="MyJavaDelegateServiceTask">
-        <omgdc:Bounds height="48.0" width="120.0" x="-60.0" y="-24.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="intermediateCatchEventID">
-        <omgdc:Bounds height="48.0" width="48.0" x="-24.0" y="-24.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="startEvent1">
-        <omgdc:Bounds height="48.0" width="48.0" x="-24.0" y="-24.0"/>
-      </bpmndi:BPMNShape>
-    </bpmndi:BPMNPlane>
-  </bpmndi:BPMNDiagram>
-  <bpmndi:BPMNDiagram>
-    <bpmndi:BPMNPlane>
-      <bpmndi:BPMNShape bpmnElement="endEvent">
-        <omgdc:Bounds height="48.0" width="48.0" x="773.4963681015013" y="0.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="userTaskID">
-        <omgdc:Bounds height="48.0" width="120.0" x="588.933264918933" y="3.552713678800501E-14"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="serviceTaskID">
-        <omgdc:Bounds height="48.0" width="120.0" x="409.68930954770497" y="7.815970093361102E-14"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="MyJavaDelegateServiceTask">
-        <omgdc:Bounds height="48.0" width="120.0" x="112.56310318256831" y="1.4921397450962104E-13"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="intermediateCatchEventID">
-        <omgdc:Bounds height="48.0" width="48.0" x="297.1262063651366" y="1.1368683772161603E-13"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="startEvent1">
-        <omgdc:Bounds height="48.0" width="48.0" x="0.0" y="1.4921397450962104E-13"/>
-      </bpmndi:BPMNShape>
-    </bpmndi:BPMNPlane>
-  </bpmndi:BPMNDiagram>
 </definitions>
