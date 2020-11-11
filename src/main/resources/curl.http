@@ -4,11 +4,11 @@
 # http://localhost:8080/flowable-rest/docs
 
 ### 查看版本
-GET http://{{localhost}}/process-api/management/engine
+GET http://{{host}}/management/engine
 Authorization: Basic rest-admin test
 
 ### 部署资源
-POST http://{{localhost}}/process-api/repository/deployments
+POST http://{{host}}/repository/deployments
 Authorization: Basic rest-admin test
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
@@ -20,11 +20,11 @@ Content-Type: text/xml
 --WebAppBoundary
 
 ### 查询部署资源
-GET http://{{localhost}}/process-api/repository/process-definitions
+GET http://{{host}}/repository/process-definitions
 Authorization: Basic rest-admin test
 
 ### 启动流程实例
-POST http://{{localhost}}/process-api/runtime/process-instances
+POST http://{{host}}/runtime/process-instances
 Authorization: Basic rest-admin test
 Content-Type: application/json
 
@@ -43,7 +43,7 @@ Content-Type: application/json
 }
 
 ### 查询流程实例列表
-GET http://{{localhost}}/process-api/runtime/process-instances
+GET http://{{host}}/runtime/process-instances
 Authorization: Basic rest-admin test
 Content-Type: application/json
 
@@ -51,11 +51,11 @@ Content-Type: application/json
 
 
 ### Get diagram for a process instance
-GET http://{{localhost}}/process-api/runtime/process-instances/{{processInstanceId}}/diagram
+GET http://{{host}}/runtime/process-instances/{{processInstanceId}}/diagram
 Authorization: Basic rest-admin test
 
 ### 查询任务列表
-POST http://{{localhost}}/process-api/query/tasks
+POST http://{{host}}/query/tasks
 Authorization: Basic rest-admin test
 Content-Type: application/json
 
@@ -64,7 +64,7 @@ Content-Type: application/json
 > {% client.global.set("taskId", response.body.data[0].id); %}
 
 ### 为任务增加评论（可以不断增加）
-POST http://{{localhost}}/process-api/runtime/tasks/{{taskId}}/comments
+POST http://{{host}}/runtime/tasks/{{taskId}}/comments
 Authorization: Basic rest-admin test
 Content-Type: application/json
 
@@ -73,12 +73,12 @@ Content-Type: application/json
   "saveProcessInstanceId" : true
 }
 ### 查询任务所有评论
-GET http://{{localhost}}/process-api/runtime/tasks/{{taskId}}/comments
+GET http://{{host}}/runtime/tasks/{{taskId}}/comments
 Authorization: Basic rest-admin test
 
 
 ### 为任务增加附件（可以不断增加）
-POST http://{{localhost}}/process-api/runtime/tasks/{{taskId}}/attachments
+POST http://{{host}}/runtime/tasks/{{taskId}}/attachments
 Authorization: Basic rest-admin test
 Content-Type: application/json
 
@@ -90,15 +90,15 @@ Content-Type: application/json
 }
 
 ### 查询任务所有附件
-GET http://{{localhost}}/process-api/runtime/tasks/{{taskId}}/attachments
+GET http://{{host}}/runtime/tasks/{{taskId}}/attachments
 Authorization: Basic rest-admin test
 
 
 ### 查询任务所有历史事件
-GET http://{{localhost}}/process-api/runtime/tasks/{{taskId}}/events
+GET http://{{host}}/runtime/tasks/{{taskId}}/events
 
 ### 认领任务
-POST http://{{localhost}}/process-api/runtime/tasks/{{taskId}}
+POST http://{{host}}/runtime/tasks/{{taskId}}
 Content-Type: application/json
 
 {
@@ -107,7 +107,7 @@ Content-Type: application/json
 }
 
 ### 委托任务
-POST http://{{localhost}}/process-api/runtime/tasks/{{taskId}}
+POST http://{{host}}/runtime/tasks/{{taskId}}
 Content-Type: application/json
 
 {
@@ -116,7 +116,7 @@ Content-Type: application/json
 }
 
 ### 解决任务
-POST http://{{localhost}}/process-api/runtime/tasks/{{taskId}}
+POST http://{{host}}/runtime/tasks/{{taskId}}
 Content-Type: application/json
 
 {
@@ -125,17 +125,17 @@ Content-Type: application/json
 
 ### 完成任务
 ### 必须把jar文件放入到lib下，REST才能找到对应的资源（cn.adbyte.flowable.a.CallExternalSystemDelegate）
-POST http://{{localhost}}/process-api/runtime/tasks/{{taskId}}
+POST http://{{host}}/runtime/tasks/{{taskId}}
 Authorization: Basic rest-admin test
 Content-Type: application/json
 
 { "action" : "complete", "variables" : [ { "name" : "approved", "value" : true} ]  }
 
 ### 查询历史任务实例 url 参数
-GET http://{{localhost}}/process-api/history/historic-task-instances
+GET http://{{host}}/history/historic-task-instances
 
 ### 查询历史任务实例 body 参数
-POST http://{{localhost}}/process-api/query/historic-task-instances
+POST http://{{host}}/query/historic-task-instances
 Content-Type: application/json
 
 {}
