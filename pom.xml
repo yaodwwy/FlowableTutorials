@@ -108,7 +108,7 @@
         <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-core</artifactId>
-            <version>7.12.0.Final</version>
+            <version>7.69.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.drools</groupId>
